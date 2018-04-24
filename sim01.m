@@ -1,0 +1,46 @@
+clc;
+clear;
+
+xmax=1;
+title('Flexible swimmer''s shape configuration and velocities');
+for t=0:0.1:100
+    count=1;
+    for x=0:0.02:1
+        data(count,1)=x;
+        %data(count,2)=(10-x)*sin(x/10+t);
+        data(count,2)=x/2*sin(x*10+t);
+        data(count,3)=x/2*cos(x*10+t);
+        m=1/2*sin(x*10+t)+5*x*cos(10*x+t);
+        data(count,4)=data(count,1)+cos(atan(m))*1/2;
+        data(count,5)=data(count,2)+sin(atan(m))*1/2;
+        count=count+1;
+    end
+    index=30;
+    l=sqrt((data(index,4)-data(index,1))^2+(data(index,5)-data(index,2))^2)
+    plot(data(:,1),data(:,2),'ob');
+    hold on;
+    plot(data(:,1),data(:,3),'-r');
+    for i=1:8:length(data)
+        x=[data(i,1);  data(i,4)];
+        y=[data(i,2);  data(i,5)];
+        plot(x,y,'-Og');
+    end
+    hold off;
+    axis([-0.5 1.9 -1.2 1.2])
+    grid on;
+    pause(0.04);
+end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
